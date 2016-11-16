@@ -1,0 +1,246 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Proje2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string Ayer = "A", Byer = "B", Cyer = "C", Dyer = "D", E = "E", F = "F", G = "G", H = "H", M = "M", N = "N", O = "O", P = "P", I = "I", J = "J", K = "K", L = "L"; // PİYONLAR
+          
+            string[] road = new string[56]; // 56 TANE YOL
+            for (int i = 0; i < road.Length; i++)
+                           road[i] = "."; // TÜM YOLLARI "." SEKLİNDE TANIMLAMA
+           
+            string[] final = new string[16]; // 16 TANE FİNAL NOKTASI 
+            for (int i = 0; i < final.Length; i++)
+                            final[i] = "O";
+            
+            Random rnd=new Random(); // zar için random
+
+            int player = 1; // player 1-2-3-4 dongude olucak
+
+            while (true)
+            {
+                Console.Clear();
+
+                Console.SetCursorPosition(0, 0);
+                Console.WriteLine("");
+                Console.WriteLine("");
+                Console.WriteLine("  Player 1                 Player 2");
+                Console.WriteLine("  + - - +                   + - - +");
+                Console.WriteLine("  A B C D     + - - - +     E F G H");
+                Console.WriteLine("  + - - +     | {0} {1} {2} |     + - - +", road[12], road[13], road[14]);
+                Console.WriteLine("  + {0} {1} +     | {2} {6} {3} |     + {4} {5} +", Ayer, Byer, road[11], road[15], E, F, final[4]);
+                Console.WriteLine("  + {0} {1} +     | {2} {6} {3} |     + {4} {5} +", Cyer, Dyer, road[10], road[16], G, H, final[5]);
+                Console.WriteLine("  + - - +     | {0} {2} {1} |     + - - +", road[9], road[17], final[6]);
+                Console.WriteLine("              | {0} {2} {1} |          ", road[8], road[18], final[7]);
+                Console.WriteLine("  + - - - - - + {0} # {1} + - - - - - +", road[7], road[19]);
+                Console.WriteLine("  | {0} {1} {2} {3} {4} {5} {6} # {7} {8} {9} {10} {11} {12} {13} |", road[0], road[1], road[2], road[3], road[4], road[5], road[6], road[20], road[21], road[22], road[23], road[24], road[25], road[26]);       //sekil sukul cızdırmece
+                Console.WriteLine("  | {0} {2} {3} {4} {5} # # # # # {6} {7} {8} {9} {1} |", road[55], road[27], final[0], final[1], final[2], final[3], final[11], final[10], final[9], final[8]);
+                Console.WriteLine("  | {0} {1} {2} {3} {4} {5} {6} # {7} {8} {9} {10} {11} {12} {13} |", road[54], road[53], road[52], road[51], road[50], road[49], road[48], road[34], road[33], road[32], road[31], road[30], road[29], road[28]);
+                Console.WriteLine("  + - - - - - + {0} # {1} + - - - - - +", road[47], road[35]);
+                Console.WriteLine("              | {0} {2} {1} |          ", road[46], road[36], final[15]);
+                Console.WriteLine("  + - - +     | {0} {2} {1} |     + - - +", road[45], road[37], final[14]);
+                Console.WriteLine("  + {0} {1} +     | {2} {6} {3} |     + {4} {5} +", M, N, road[44], road[38], I, J, final[13]);
+                Console.WriteLine("  + {0} {1} +     | {2} {6} {3} |     + {4} {5} +", O, P, road[43], road[39], K, L, final[12]);
+                Console.WriteLine("  + - - +     | {0} {1} {2} |     + - - +", road[42], road[41], road[40]);
+                Console.WriteLine("  M N O P     + - - - +     I J K L");
+                Console.WriteLine("  Player 4                 Player 3");
+
+                Console.SetCursorPosition(40, 9);
+                Console.WriteLine("Player: "+player);
+                Console.SetCursorPosition(40, 10);
+                int dice = rnd.Next(1, 7);
+                Console.Write("Dice: "+dice);
+                Console.SetCursorPosition(40, 11);
+                Console.Write("Enter Pawn: ");
+                string pawn = Console.ReadLine().ToUpper();
+                player = 1;
+                //dice = 6;
+                int konum = 0; //piyonların yerini bellirlemek için kullanılacak
+                int yenikonum = 0; //piyonun yeni yeri
+                
+                if (player == 1)
+                {
+
+                    if (pawn == "A")
+                    {
+                        if (Ayer == "A")
+                        {
+                            if (dice == 6)
+                            {
+                                if (road[0]==".")
+                                {
+                                    road[0] = "A";
+                                    Ayer = ".";    
+                                }
+                                else
+                                {
+                                    Console.SetCursorPosition(40, 11);
+                                    Console.WriteLine("DOLUYA GELEMEM");
+                                }
+                                
+                            }
+                            else
+                                Console.WriteLine("6 gelmediği için çıkamazsınız");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < road.Length; i++)
+                            {
+                             if(road[i]==pawn)
+                                 konum=i;
+                            }
+                            yenikonum = konum + dice;
+                            road[yenikonum] = pawn;
+                            road[konum] = ".";
+                        }
+                    }
+                    if (pawn == "B")
+                    {
+                        if (Byer == "B")
+                        {
+                            if (dice == 6)
+                            {
+                                if (road[0] == ".")
+                                {
+                                    road[0] = "B";
+                                    Byer = ".";
+                                }
+                                else
+                                {
+                                    Console.SetCursorPosition(40, 11);
+                                    Console.WriteLine("DOLUYA GELEMEM");
+                                }
+
+                            }
+                            else
+                                Console.WriteLine("6 gelmediği için çıkamazsınız");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < road.Length; i++)
+                            {
+                                if (road[i] == pawn)
+                                    konum = i;
+                            }
+                            yenikonum = konum + dice;
+                            road[yenikonum] = pawn;
+                            road[konum] = ".";
+                        }
+                    }
+                    if (pawn == "C")
+                    {
+
+                        if (Cyer == "C")
+                        {
+                            if (dice == 6)
+                            {
+                                if (road[0] == ".")
+                                {
+                                    road[0] = "C";
+                                    Cyer = ".";
+                                }
+                                else
+                                {
+                                    Console.SetCursorPosition(40, 11);
+                                    Console.WriteLine("DOLUYA GELEMEM");
+                                }
+
+                            }
+                            else
+                                Console.WriteLine("6 gelmediği için çıkamazsınız");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < road.Length; i++)
+                            {
+                                if (road[i] == pawn)
+                                    konum = i;
+                            }
+                            yenikonum = konum + dice;
+                            road[yenikonum] = pawn;
+                            road[konum] = ".";
+                        }
+                    }
+                    if (pawn == "D")
+                    {
+
+                        if (Dyer == "D")
+                        {
+                            if (dice == 6)
+                            {
+                                if (road[0] == ".")
+                                {
+                                    road[0] = "D";
+                                    Dyer = ".";
+                                }
+                                else
+                                {
+                                    Console.SetCursorPosition(40, 11);
+                                    Console.WriteLine("DOLUYA GELEMEM");
+                                }
+
+                            }
+                            else
+                                Console.WriteLine("6 gelmediği için çıkamazsınız");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < road.Length; i++)
+                            {
+                                if (road[i] == pawn)
+                                    konum = i;
+                            }
+                            yenikonum = konum + dice;
+                            road[yenikonum] = pawn;
+                            road[konum] = ".";
+                        }
+                    }
+                }
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            Console.ReadLine();
+        }
+    }
+}
